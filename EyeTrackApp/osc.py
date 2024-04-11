@@ -207,6 +207,8 @@ def output_osc(eye_x, eye_y, eye_blink, last_blink, pupil_dilation, avg_velocity
                 "/avatar/parameters/v2/EyeLidRight",
                 eyelid_transformer(self, self.r_eye_blink),
             )
+        if self.eye_id in [EyeId.RIGHT] and self.eye_id in [EyeId.LEFT]  and not se:
+            self.client.send_message("/avatar/parameters/v2/EyeY", (self.left_y + self.right_y)/2)
 
     if self.config.gui_vrc_native:  # VRC NATIVE
 
