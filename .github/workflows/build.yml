@@ -77,7 +77,8 @@ jobs:
           ls -a build
           mv ./dist/eyetrackapp ./dist/eyetrackapp.bin
 
-      - uses: actions/upload-artifact@v2
+      - name: Upload Build Artifacts
+        uses: actions/upload-artifact@v2
         with:
           name: production-files
           path: dist
@@ -114,14 +115,3 @@ jobs:
         run: |
           chmod +x ./.github/scripts/prepareCMD.sh
           semantic-release
-  cleanup:
-    name: Cleanup actions
-    needs:
-      - deploy
-    runs-on: ubuntu-latest
-    timeout-minutes: 10
-    steps:
-      - name: "♻️ remove build artifacts"
-        uses: geekyeggo/delete-artifact@v1
-        with:
-          name: production-files
